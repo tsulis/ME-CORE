@@ -7,6 +7,9 @@ public interface ApiPath {
   String ID = "/{id}";
   String USER = BASE_PATH + "/user";
   String AUTH = BASE_PATH + "/auth";
+  String SYNC = BASE_PATH + "/sync";
+  String PRODUCT = BASE_PATH + "/product";
+  String STORE = BASE_PATH + "/store";
   String APPEND_ACTIVE = "/active";
   String APPEND_REGISTER = "/register";
   String APPEND_LOGIN = "/login";
