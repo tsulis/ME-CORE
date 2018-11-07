@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
       String salt = BCrypt.gensalt();
       String hashpw = BCrypt.hashpw(user.getPassword(), salt);
       return userRepository.save(User.builder()
-          .isDeleted(0)
+          .isDeleted(false)
           .salt(salt)
           .password(hashpw)
           .email(user.getEmail())

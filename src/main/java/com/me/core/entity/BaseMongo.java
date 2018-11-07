@@ -50,5 +50,9 @@ public class BaseMongo implements Serializable {
     @Field(value = BaseMongoFields.IS_DELETED)
     private boolean isDeleted;
 
+    private boolean isActive;
+
     private Date syncTime;
+
+    private String timestamp;
 }
