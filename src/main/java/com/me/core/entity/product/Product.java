@@ -23,7 +23,7 @@ public class Product extends BaseMongo {
   private String type;
   private boolean isDefault;
   private String handle;
-  private String barCode;
+  private String barcode;
   private String sku;
   private String unitMeasurement;
   private Double price;
@@ -45,6 +45,7 @@ public class Product extends BaseMongo {
   private String timestamp;
   private boolean requireSerialNumber;
 
+  private List<ProductInventory> inventories;
   private List<ProductImage> productImages;
   private List<ProductVariant> productVariants;
   private List<ModifierGroup> modifierGroups;
