@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
   public Mono<RegisterResponse> register(UserRequest userRequest) {
     return Mono.defer(() -> {
       final int vCode = new Random().nextInt(4);
-      return create(User.builder()
+      return create(User.userBuilder()
           .email(userRequest.getEmail())
           .fullName(userRequest.getFullName())
           .password(userRequest.getPassword())
@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
     return Mono.defer(() -> {
       String salt = BCrypt.gensalt();
       String hashpw = BCrypt.hashpw(user.getPassword(), salt);
-      return userRepository.save(User.builder()
+      return userRepository.save(User.userBuilder()
           .isDeleted(false)
           .salt(salt)
           .password(hashpw)
