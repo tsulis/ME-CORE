@@ -26,7 +26,7 @@ public class Modifier extends BaseEntity implements Serializable {
   private int quantity;
   private String properties;
 
-  @Builder
+  @Builder(builderMethodName = "modifierBuilder")
   public Modifier(Date createdDate, String createdBy, Date updatedDate,
       String updatedBy, boolean isDeleted, boolean isActive, Date syncTime,
       String timestamp, String modifierId, ModifierGroup modifierGroup, String name,

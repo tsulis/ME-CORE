@@ -54,7 +54,7 @@ public class Product extends BaseMongo implements Serializable {
 
   private String channel; //ME, ISELLER
 
-  @Builder
+  @Builder(builderMethodName = "productBuilder")
   public Product(String id, Long version, Date createdDate, String createdBy,
       Date updatedDate, String updatedBy, boolean isDeleted, boolean isActive,
       Date syncTime, String timestamp, String productId,

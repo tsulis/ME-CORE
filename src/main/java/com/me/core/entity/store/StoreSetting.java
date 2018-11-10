@@ -46,7 +46,7 @@ public class StoreSetting extends BaseEntity implements Serializable {
   private Double loyaltyExchangeAmount;
   private String shippingOriginId;
 
-  @Builder
+  @Builder(builderMethodName = "storeSettingBuilder")
   public StoreSetting(Date createdDate, String createdBy, Date updatedDate,
       String updatedBy, boolean isDeleted, boolean isActive, Date syncTime,
       String timestamp, String photoUrl, String logoUrl, String culture, String timezone,

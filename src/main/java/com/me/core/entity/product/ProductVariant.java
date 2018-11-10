@@ -21,7 +21,7 @@ public class ProductVariant extends BaseEntity implements Serializable {
   private int sequence;
   private String properties;
 
-  @Builder
+  @Builder(builderMethodName = "productVariantBuilder")
   public ProductVariant(Date createdDate, String createdBy, Date updatedDate,
       String updatedBy, boolean isDeleted, boolean isActive, Date syncTime,
       String timestamp, String variantId, String name, int sequence, String properties) {

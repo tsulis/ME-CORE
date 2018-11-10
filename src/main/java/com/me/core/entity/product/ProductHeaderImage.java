@@ -21,7 +21,7 @@ public class ProductHeaderImage extends BaseEntity implements Serializable {
   private boolean isDefault;
   private String altText;
 
-  @Builder
+  @Builder(builderMethodName = "productHeaderImageBuilder")
   public ProductHeaderImage(Date createdDate, String createdBy, Date updatedDate,
       String updatedBy, boolean isDeleted, boolean isActive, Date syncTime,
       String timestamp, String productHeaderImageId, String url, boolean isDefault,

@@ -30,7 +30,7 @@ public class ProductHeader extends BaseEntity implements Serializable {
   private List<ProductHeaderImage> productHeaderImages;
   private List<Tag> tags;
 
-  @Builder
+  @Builder(builderMethodName = "productHeaderBuilder")
   public ProductHeader(Date createdDate, String createdBy, Date updatedDate,
       String updatedBy, boolean isDeleted, boolean isActive, Date syncTime,
       String timestamp, String productHeaderId, String name, String description,

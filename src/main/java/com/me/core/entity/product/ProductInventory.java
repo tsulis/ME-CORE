@@ -20,7 +20,7 @@ public class ProductInventory extends BaseEntity implements Serializable {
   private String outletName;
   private String unitInStock;
 
-  @Builder
+  @Builder(builderMethodName = "productInventoryBuilder")
   public ProductInventory(Date createdDate, String createdBy, Date updatedDate,
       String updatedBy, boolean isDeleted, boolean isActive, Date syncTime,
       String timestamp, String outletId, String outletName, String unitInStock) {

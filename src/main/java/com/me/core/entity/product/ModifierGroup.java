@@ -26,7 +26,7 @@ public class ModifierGroup extends BaseEntity implements Serializable {
   private String properties;
   private List<Modifier> modifiers;
 
-  @Builder
+  @Builder(builderMethodName = "modifierGroupBuilder")
   public ModifierGroup(Date createdDate, String createdBy, Date updatedDate,
       String updatedBy, boolean isDeleted, boolean isActive, Date syncTime,
       String timestamp, String outletId, String name, String color, boolean multiSelection,

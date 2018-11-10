@@ -20,7 +20,7 @@ public class ProductType extends BaseEntity implements Serializable {
   private String name;
   private String color;
 
-  @Builder
+  @Builder(builderMethodName = "productTypeBuilder")
   public ProductType(Date createdDate, String createdBy, Date updatedDate,
       String updatedBy, boolean isDeleted, boolean isActive, Date syncTime,
       String timestamp, String productTypeId, String name, String color) {

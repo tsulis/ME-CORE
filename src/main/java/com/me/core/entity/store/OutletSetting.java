@@ -23,7 +23,7 @@ public class OutletSetting extends BaseEntity implements Serializable {
   private boolean autoLockScreen;
   private String customSettings;
 
-  @Builder
+  @Builder(builderMethodName = "outletSettingBuilder")
   public OutletSetting(Date createdDate, String createdBy, Date updatedDate,
       String updatedBy, boolean isDeleted, boolean isActive, Date syncTime,
       String timestamp, String photoUrl, boolean alwaysPrintReceipt, boolean alwaysFulfillOrder,

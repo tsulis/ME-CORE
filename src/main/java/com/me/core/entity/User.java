@@ -33,7 +33,7 @@ public class User extends BaseMongo implements Serializable {
   private boolean isLogin;
   private Date lastPasswordResetDate;
 
-  @Builder
+  @Builder(builderMethodName = "userBuilder")
   public User(String id, Long version, Date createdDate, String createdBy, Date updatedDate,
       String updatedBy, boolean isDeleted, boolean isActive, Date syncTime,
       String timestamp, String fullName, String email, String phone, String dob,

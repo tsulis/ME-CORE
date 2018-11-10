@@ -20,7 +20,7 @@ public class Tag extends BaseEntity implements Serializable {
   private String tagId;
   private String entityType;
 
-  @Builder
+  @Builder(builderMethodName = "tagBuilder")
   public Tag(Date createdDate, String createdBy, Date updatedDate,
       String updatedBy, boolean isDeleted, boolean isActive, Date syncTime,
       String timestamp, String name, String tagId, String entityType) {

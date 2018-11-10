@@ -21,7 +21,7 @@ public class ProductImage extends BaseEntity implements Serializable {
   private boolean isDefault;
   private String altText;
 
-  @Builder
+  @Builder(builderMethodName = "productImageBuilder")
   public ProductImage(Date createdDate, String createdBy, Date updatedDate,
       String updatedBy, boolean isDeleted, boolean isActive, Date syncTime,
       String timestamp, String productImageId, String url, boolean isDefault,

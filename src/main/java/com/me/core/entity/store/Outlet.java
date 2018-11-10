@@ -38,7 +38,7 @@ public class Outlet extends BaseEntity implements Serializable {
   private String properties;
   private OutletSetting outletSetting;
 
-  @Builder
+  @Builder(builderMethodName = "outletBuilder")
   public Outlet(Date createdDate, String createdBy, Date updatedDate,
       String updatedBy, boolean isDeleted, boolean isActive, Date syncTime,
       String timestamp, String outletId, String name, String phone, String address,

@@ -19,7 +19,7 @@ public class TableLayout extends BaseEntity implements Serializable {
 
   private String tableLayoutId;
 
-  @Builder
+  @Builder(builderMethodName = "tableLayoutBuilder")
   public TableLayout(Date createdDate, String createdBy, Date updatedDate, String updatedBy,
       boolean isDeleted, boolean isActive, Date syncTime, String timestamp,
       String tableLayoutId) {

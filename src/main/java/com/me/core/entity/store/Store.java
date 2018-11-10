@@ -53,7 +53,7 @@ public class Store extends BaseMongo implements Serializable {
 
   private String channel; //ME, ISELLER
 
-  @Builder
+  @Builder(builderMethodName = "storeBuilder")
   public Store(String id, Long version, Date createdDate, String createdBy,
       Date updatedDate, String updatedBy, boolean isDeleted, boolean isActive,
       Date syncTime, String timestamp, String storeId, String ownerId, String businessType,
