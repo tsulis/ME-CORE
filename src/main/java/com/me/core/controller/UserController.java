@@ -4,11 +4,10 @@ import com.me.core.constant.ApiPath;
 import com.me.core.constant.enums.ResponseCode;
 import com.me.core.model.request.MandatoryRequest;
 import com.me.core.model.request.UserRequest;
-import com.me.core.model.response.BaseResponse;
+import com.me.core.model.request.VerificationRequest;
 import com.me.core.model.response.CommonResponse;
 import com.me.core.service.UserService;
 import io.swagger.annotations.Api;
-import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +37,16 @@ public class UserController {
       return userService.register(userRequest)
           .map(registerResponse -> {
             return CommonResponse.constructResponse(ResponseCode.SUCCESS, registerResponse);
+          });
+    }).subscribeOn(Schedulers.elastic());
+  }
+
+  @PostMapping(value = ApiPath.APPEND_VERIFICATION)
+  public Mono verification(@ApiIgnore @ModelAttribute MandatoryRequest mandatoryRequest, @RequestBody VerificationRequest verificationRequest){
+    return Mono.defer(() -> {
+      return userService.verification(mandatoryRequest, verificationRequest)
+          .map(verificationResponse -> {
+            return CommonResponse.constructResponse(ResponseCode.SUCCESS, verificationResponse);
           });
     }).subscribeOn(Schedulers.elastic());
   }
