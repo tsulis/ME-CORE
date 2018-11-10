@@ -27,8 +27,7 @@ import springfox.documentation.annotations.ApiIgnore;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserController {
 
-  @Autowired
-  UserService userService;
+  private final UserService userService;
 
   @PostMapping(value = ApiPath.APPEND_REGISTER)
   public Mono register(@ApiIgnore @ModelAttribute MandatoryRequest mandatoryRequest,
@@ -42,7 +41,8 @@ public class UserController {
   }
 
   @PostMapping(value = ApiPath.APPEND_VERIFICATION)
-  public Mono verification(@ApiIgnore @ModelAttribute MandatoryRequest mandatoryRequest, @RequestBody VerificationRequest verificationRequest){
+  public Mono verification(@ApiIgnore @ModelAttribute MandatoryRequest mandatoryRequest,
+      @RequestBody VerificationRequest verificationRequest){
     return Mono.defer(() -> {
       return userService.verification(mandatoryRequest, verificationRequest)
           .map(verificationResponse -> {

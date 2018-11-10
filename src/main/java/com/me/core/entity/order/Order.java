@@ -61,5 +61,6 @@ public class Order extends BaseMongo implements Serializable {
   private String billing;
   private String shipping;
   private List<OrderDetail> orderDetails;
-
+  private List<Fulfillment> fulfillments;
+  private List<OrderRefund> refundedOrders;
 }
