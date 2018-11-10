@@ -6,6 +6,7 @@ import com.me.core.model.request.UserRequest;
 import com.me.core.model.response.RegisterResponse;
 import com.me.core.repository.UserRepository;
 import com.me.core.service.AuthService;
+import com.me.core.service.EmailService;
 import com.me.core.service.UserService;
 import java.util.Date;
 import java.util.Random;
@@ -25,6 +26,9 @@ public class UserServiceImpl implements UserService {
   @Autowired
   AuthService authService;
 
+  @Autowired
+  EmailService emailService;
+
   @Override
   public Mono<RegisterResponse> register(UserRequest userRequest) {
     return Mono.defer(() -> {
@@ -43,6 +47,7 @@ public class UserServiceImpl implements UserService {
                 user.getEmail(), user.getFullName(), DateUtils.addHours(new Date(), 1));
 
             //todo.. send verification code to email
+            emailService.sendMail(user);
 
             return Mono.just(RegisterResponse.builder()
                 .token(token)
