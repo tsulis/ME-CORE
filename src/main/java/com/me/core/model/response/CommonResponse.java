@@ -1,6 +1,7 @@
 package com.me.core.model.response;
 
 import com.me.core.constant.enums.ResponseCode;
+import com.me.core.libraries.exception.BusinessLogicException;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -14,6 +15,16 @@ public class CommonResponse {
         return new BaseResponse.BaseResponseBuilder<T>()
             .code(responseCode.getCode())
             .message(responseCode.getMessage())
+            .errors(Collections.emptyList())
+            .serverTime(new Date())
+            .data(data)
+            .build();
+    }
+
+    public static <T> BaseResponse<T> constructResponse(BusinessLogicException ble, List<String> errors, T data) {
+        return new BaseResponse.BaseResponseBuilder<T>()
+            .code(ble.getCode())
+            .message(ble.getMessage())
             .errors(Collections.emptyList())
             .serverTime(new Date())
             .data(data)
