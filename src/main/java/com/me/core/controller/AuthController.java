@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
@@ -44,6 +45,7 @@ public class AuthController {
 
   @GetMapping(value = ApiPath.APPEND_LOGOUT)
   public Mono logout(@ApiIgnore @ModelAttribute MandatoryRequest mandatoryRequest,
+      @RequestHeader(value = "Authorization", required = true) String authorization,
       HttpServletRequest httpServletRequest) {
     return Mono.defer(() -> {
       return authService.logout(httpServletRequest)

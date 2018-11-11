@@ -5,7 +5,9 @@ import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.me.core.constant.fields.BaseMongoFields;
 import com.me.core.model.request.MandatoryRequest;
+import java.util.Arrays;
 import java.util.Map;
+import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.jboss.logging.MDC;
@@ -15,18 +17,29 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 @Component
 public class Interceptor extends HandlerInterceptorAdapter {
 
+  private static final String[] exclude = new String[]{
+      "/swagger-ui.html", "/swagger-resources/configuration/ui",
+      "/swagger-resources/configuration/security",
+      "/swagger-resources", "/", "/error", "/csrf", "/error"
+  };
+
   @Override
-  public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-    if (!request.getRequestURI().equals("/me-core/user/register")) {
+  public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
+      Object handler) {
+    if (Arrays.stream(exclude).noneMatch(s -> s.equals(request.getRequestURI()))) {
+      System.out.println(request.getRequestURI());
       String authorization = request.getHeader("Authorization");
-      String token = authorization.split(" ")[1];
-      DecodedJWT decode = JWT.decode(token);
+      String email = "";
+      if (Objects.nonNull(authorization)) {
+        String token = authorization.split(" ")[1];
+        DecodedJWT decode = JWT.decode(token);
 
-      Map<String, Claim> claims = decode.getClaims();
+        Map<String, Claim> claims = decode.getClaims();
 
-      Claim claimEmail = claims.get("email");
+        Claim claimEmail = claims.get("email");
 
-      String email = String.valueOf(claimEmail.asString());
+        email = String.valueOf(claimEmail.asString());
+      }
 
       MandatoryRequest mandatoryRequest = MandatoryRequest.builder()
           .storeId(request.getHeader("storeId"))

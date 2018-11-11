@@ -31,11 +31,11 @@ public class SwaggerConfiguration {
         .apis(RequestHandlerSelectors.basePackage("com.me.core.controller"))
         .paths(regex("/.*"))
         .build()
-        .globalOperationParameters(Arrays.asList(
-            new ParameterBuilder().name("Authorization").parameterType(HEADER)
-                .modelRef(new ModelRef(STRING)).required(true).defaultValue("")
-                .description("client's Authorization").build()
-        ))
+//        .globalOperationParameters(Arrays.asList(
+//            new ParameterBuilder().name("Authorization").parameterType(HEADER)
+//                .modelRef(new ModelRef(STRING)).required(true).defaultValue("")
+//                .description("client's Authorization").build()
+//        ))
 //        .globalOperationParameters(Arrays.asList(
 //            new ParameterBuilder().name("storeId").parameterType(HEADER)
 //                .modelRef(new ModelRef(STRING)).required(true).defaultValue("")
