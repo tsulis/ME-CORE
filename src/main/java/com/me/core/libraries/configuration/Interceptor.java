@@ -20,7 +20,8 @@ public class Interceptor extends HandlerInterceptorAdapter {
   private static final String[] exclude = new String[]{
       "/swagger-ui.html", "/swagger-resources/configuration/ui",
       "/swagger-resources/configuration/security",
-      "/swagger-resources", "/", "/error", "/csrf", "/error"
+      "/swagger-resources", "/", "/error", "/csrf", "/error",
+      "/me-core/user/register"
   };
 
   @Override
