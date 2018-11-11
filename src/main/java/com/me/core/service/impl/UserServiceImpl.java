@@ -73,6 +73,8 @@ public class UserServiceImpl implements UserService {
 
       return userRepository.findByEmailAndVerificationCode(email, vCode)
           .flatMap(user -> {
+            user.setEnabled(true);
+            userRepository.save(user);
 
             return Mono.just(VerificationResponse.builder()
                 .user(UserDTO.builder()
