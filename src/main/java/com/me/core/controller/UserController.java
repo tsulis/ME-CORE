@@ -3,6 +3,7 @@ package com.me.core.controller;
 import com.me.core.constant.ApiPath;
 import com.me.core.constant.enums.ResponseCode;
 import com.me.core.model.request.MandatoryRequest;
+import com.me.core.model.request.UpdateRequest;
 import com.me.core.model.request.UserRequest;
 import com.me.core.model.request.VerificationRequest;
 import com.me.core.model.response.CommonResponse;
@@ -49,6 +50,18 @@ public class UserController {
       return userService.verification(mandatoryRequest, verificationRequest)
           .map(verificationResponse -> {
             return CommonResponse.constructResponse(ResponseCode.SUCCESS, verificationResponse);
+          });
+    }).subscribeOn(Schedulers.elastic());
+  }
+
+  @PostMapping(value = ApiPath.APPEND_UPDATE)
+  public Mono update(@ApiIgnore @ModelAttribute MandatoryRequest mandatoryRequest,
+                     @RequestHeader(value = "Authorization", required = true) String authorization,
+                     @RequestBody UpdateRequest updateRequest){
+    return Mono.defer(() -> {
+      return userService.update(mandatoryRequest, updateRequest)
+          .map(updateResponse -> {
+            return CommonResponse.constructResponse(ResponseCode.SUCCESS, updateResponse);
           });
     }).subscribeOn(Schedulers.elastic());
   }

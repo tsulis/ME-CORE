@@ -3,9 +3,11 @@ package com.me.core.service.impl;
 import com.me.core.entity.User;
 import com.me.core.model.dto.UserDTO;
 import com.me.core.model.request.MandatoryRequest;
+import com.me.core.model.request.UpdateRequest;
 import com.me.core.model.request.UserRequest;
 import com.me.core.model.request.VerificationRequest;
 import com.me.core.model.response.RegisterResponse;
+import com.me.core.model.response.UpdateResponse;
 import com.me.core.model.response.VerificationResponse;
 import com.me.core.repository.UserRepository;
 import com.me.core.service.AuthService;
@@ -69,20 +71,21 @@ public class UserServiceImpl implements UserService {
   public Mono<VerificationResponse> verification(MandatoryRequest mandatoryRequest, VerificationRequest verificationRequest) {
     return Mono.defer(() -> {
       String email = mandatoryRequest.getEmail();
-      int vCode = verificationRequest.getVCode();
+      int vCode = verificationRequest.getVerificationCode();
 
       return userRepository.findByEmailAndVerificationCode(email, vCode)
           .flatMap(user -> {
             user.setEnabled(true);
-            userRepository.save(user);
-
-            return Mono.just(VerificationResponse.builder()
-                .user(UserDTO.builder()
-                    .email(user.getEmail())
-                    .fullName(user.getFullName())
-                    .enabled(user.isEnabled())
-                    .build())
-                .build());
+            return userRepository.save(user)
+                .flatMap(result -> {
+                  return Mono.just(VerificationResponse.builder()
+                      .user(UserDTO.builder()
+                          .email(result.getEmail())
+                          .fullName(result.getFullName())
+                          .enabled(result.isEnabled())
+                          .build())
+                      .build());
+                });
           })
           .switchIfEmpty(Mono.error(new ExceptionInInitializerError("Invalid Request")));
     }).subscribeOn(Schedulers.elastic());
@@ -104,6 +107,38 @@ public class UserServiceImpl implements UserService {
           .enabled(user.isEnabled())
           .verificationCode(user.getVerificationCode())
           .build());
+    }).subscribeOn(Schedulers.elastic());
+  }
+
+  @Override
+  public Mono<UpdateResponse> update(MandatoryRequest mandatoryRequest, UpdateRequest updateRequest) {
+    return Mono.defer(() -> {
+      return userRepository.findByEmail(mandatoryRequest.getEmail())
+          .flatMap(user -> {
+            String salt = BCrypt.gensalt();
+            String hashpw = BCrypt.hashpw(user.getPassword(), salt);
+
+            user.setFullName(updateRequest.getFullName());
+            user.setEmail(updateRequest.getEmail());
+            user.setPhone(updateRequest.getPhone());
+            user.setPassword(hashpw);
+            user.setSalt(salt);
+            user.setUpdatedBy("SYSTEM");
+            user.setUpdatedDate(new Date());
+
+            return userRepository.save(user)
+                .flatMap(result -> {
+                      return Mono.just(UpdateResponse.builder()
+                          .user(UserDTO.builder()
+                              .email(result.getEmail())
+                              .fullName(result.getFullName())
+                              .enabled(result.isEnabled())
+                              .build())
+                          .build());
+                    }
+                );
+          })
+          .switchIfEmpty(Mono.error(new ExceptionInInitializerError("Invalid Request")));
     }).subscribeOn(Schedulers.elastic());
   }
 }

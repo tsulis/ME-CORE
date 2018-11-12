@@ -13,6 +13,7 @@ public interface ApiPath {
   String APPEND_ACTIVE = "/active";
   String APPEND_REGISTER = "/register";
   String APPEND_VERIFICATION = "/verification";
+  String APPEND_UPDATE = "/update";
   String APPEND_LOGIN = "/login";
   String APPEND_LOGOUT = "/logout";
   String APPEND_REFRESH = "/refresh";
