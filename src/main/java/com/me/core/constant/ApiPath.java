@@ -6,6 +6,7 @@ public interface ApiPath {
   String SYSTEM_PARAMETER = BASE_PATH + "/systemParameters";
   String ID = "/{id}";
   String USER = BASE_PATH + "/user";
+  String MERCHANT = BASE_PATH + "/merchant";
   String AUTH = BASE_PATH + "/auth";
   String CART = BASE_PATH + "/cart";
   String SYNC = BASE_PATH + "/sync";

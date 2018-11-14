@@ -24,11 +24,12 @@ public class User extends BaseMongo implements Serializable {
   private String dob;
   private String photo; //BASE64
   private String photoUrl;
-  private String password;
-  private String salt;
   private Double wallet;
   private int point;
   private int verificationCode; //ex: 12345
+
+  private String salt;
+  private String password;
   private boolean enabled; // status user
   private boolean isLogin;
   private Date lastPasswordResetDate;

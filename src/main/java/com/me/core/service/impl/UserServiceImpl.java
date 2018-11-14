@@ -95,11 +95,11 @@ public class UserServiceImpl implements UserService {
   public Mono<User> create(User user) {
     return Mono.defer(() -> {
       String salt = BCrypt.gensalt();
-      String hashpw = BCrypt.hashpw(user.getPassword(), salt);
+      String hashPw = BCrypt.hashpw(user.getPassword(), salt);
       return userRepository.save(User.userBuilder()
           .isDeleted(false)
           .salt(salt)
-          .password(hashpw)
+          .password(hashPw)
           .email(user.getEmail())
           .fullName(user.getFullName())
           .createdBy(user.getCreatedBy())

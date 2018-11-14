@@ -8,4 +8,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = ApiPath.STORE)
 public class StoreController {
 
+
 }

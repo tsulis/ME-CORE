@@ -1,5 +1,6 @@
 package com.me.core.libraries.exception;
 
+import com.me.core.constant.enums.ResponseCode;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,12 @@ public class BusinessLogicException extends RuntimeException {
     super();
     this.setCode(code);
     this.setMessage(message);
+  }
+
+  public BusinessLogicException(ResponseCode responseCode) {
+    super();
+    this.setCode(responseCode.getCode());
+    this.setMessage(responseCode.getMessage());
   }
 
   @Override

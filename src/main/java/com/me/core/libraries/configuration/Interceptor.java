@@ -28,7 +28,6 @@ public class Interceptor extends HandlerInterceptorAdapter {
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
       Object handler) {
     if (Arrays.stream(exclude).noneMatch(s -> s.equals(request.getRequestURI()))) {
-      System.out.println(request.getRequestURI());
       String authorization = request.getHeader("Authorization");
       String email = "";
       if (Objects.nonNull(authorization)) {
