@@ -5,7 +5,6 @@ import com.me.core.libraries.wrapper.PageWrapper;
 import com.me.core.model.request.MandatoryRequest;
 import java.util.Date;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import reactor.core.publisher.Mono;
 
 public interface MerchantRepositoryCustom {

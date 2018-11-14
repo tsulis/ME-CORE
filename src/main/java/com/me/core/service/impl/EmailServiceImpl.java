@@ -2,13 +2,12 @@ package com.me.core.service.impl;
 
 import com.me.core.entity.User;
 import com.me.core.service.EmailService;
+import java.util.Properties;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-import java.util.Properties;
 
 @Service
 public class EmailServiceImpl implements EmailService {

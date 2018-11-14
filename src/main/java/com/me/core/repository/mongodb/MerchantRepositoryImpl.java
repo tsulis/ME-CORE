@@ -9,7 +9,6 @@ import com.me.core.libraries.utility.PageUtils;
 import com.me.core.libraries.wrapper.PageWrapper;
 import com.me.core.model.request.MandatoryRequest;
 import com.me.core.repository.MerchantRepositoryCustom;
-import com.sun.deploy.net.proxy.pac.PACFunctions;
 import java.util.Date;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
